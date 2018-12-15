@@ -19,7 +19,7 @@ function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR
 {NIND MAXGEN NVAR ELITIST STOP_PERCENTAGE PR_CROSS PR_MUT CROSSOVER LOCALLOOP}
 
 
-        maxChances = 1000;
+        maxChances = 70;
         GGAP = 1 - ELITIST;
         mean_fits=zeros(1,MAXGEN+1);
         worst=zeros(1,MAXGEN+1);
