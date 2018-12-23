@@ -76,9 +76,11 @@ function run_ga_path(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROS
         	FitnV=ranking(ObjV);
         	%select individuals for breeding
         	SelCh=select('sus', Chrom, FitnV, GGAP);
+            
         	%To DO : Implement RECOMBINATION and MUTATION
             %SelCh = recombin(CROSSOVER,SelCh,PR_CROSS);
-            %SelCh=mutateTSP('inversion',SelCh,PR_MUT);
+            SelCh=mutateTSP_path('inversion',SelCh,PR_MUT);
+            
             %evaluate offspring, call objective function
         	ObjVSel = tspfun(SelCh,Dist);
             %reinsert offspring into population
