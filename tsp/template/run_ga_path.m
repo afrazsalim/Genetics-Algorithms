@@ -1,4 +1,4 @@
-function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR_MUT, CROSSOVER, LOCALLOOP, ah1, ah2, ah3)
+function run_ga_path(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR_MUT, CROSSOVER, LOCALLOOP, ah1, ah2, ah3)
 % usage: run_ga(x, y, 
 %               NIND, MAXGEN, NVAR, 
 %               ELITIST, STOP_PERCENTAGE, 
@@ -34,14 +34,14 @@ function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR
         % initialize population
         Chrom=zeros(NIND,NVAR);
         for row=1:NIND
-        	Chrom(row,:)=path2adj(randperm(NVAR));
-            %Chrom(row,:)=randperm(NVAR);
+        	%Chrom(row,:)=path2adj(randperm(NVAR));
+            Chrom(row,:)=randperm(NVAR);  % CHROM now contains n paths of NVAR length 
         end
         gen=0;
         % number of individuals of equal fitness needed to stop
         stopN=ceil(STOP_PERCENTAGE*NIND);
         % evaluate initial population
-        ObjV = tspfun(Chrom,Dist);
+        ObjV = tspfun_path(Chrom,Dist);
         best=zeros(1,MAXGEN);
         %Create a new StopingCriteria's class
         impObject = improvement;
@@ -76,9 +76,9 @@ function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR
         	FitnV=ranking(ObjV);
         	%select individuals for breeding
         	SelCh=select('sus', Chrom, FitnV, GGAP);
-        	%recombine individuals (crossover)
-            SelCh = recombin(CROSSOVER,SelCh,PR_CROSS);
-            SelCh=mutateTSP('inversion',SelCh,PR_MUT);
+        	%To DO : Implement RECOMBINATION and MUTATION
+            %SelCh = recombin(CROSSOVER,SelCh,PR_CROSS);
+            %SelCh=mutateTSP('inversion',SelCh,PR_MUT);
             %evaluate offspring, call objective function
         	ObjVSel = tspfun(SelCh,Dist);
             %reinsert offspring into population
