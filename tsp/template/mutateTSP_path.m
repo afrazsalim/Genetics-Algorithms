@@ -16,7 +16,7 @@
 %                after mutation in the same format as OldChrom.
 
 
-function NewChrom = mutateTSP(MUT_F, OldChrom, MutOpt);
+function NewChrom = mutateTSP_path(MUT_F, OldChrom, MutOpt);
 
 % Check parameter consistency
    if nargin < 2,  error('Not enough input parameters'); end
