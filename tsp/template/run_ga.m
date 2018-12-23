@@ -19,6 +19,8 @@ function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR
 {NIND MAXGEN NVAR ELITIST STOP_PERCENTAGE PR_CROSS PR_MUT CROSSOVER LOCALLOOP}
 
 
+        tic % Timer function to evaluate performance
+
         maxChances = 1000;
         GGAP = 1 - ELITIST;
         mean_fits=zeros(1,MAXGEN+1);
@@ -86,6 +88,9 @@ function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR
         	%increment generation counter
         	gen=gen+1;            
         end
+        
+        toc  % end of timer function
+        
 end
 
 
