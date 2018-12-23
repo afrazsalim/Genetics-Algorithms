@@ -78,7 +78,7 @@ function run_ga_path(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROS
         	SelCh=select('sus', Chrom, FitnV, GGAP);
             
         	%To DO : Implement RECOMBINATION and MUTATION
-            %SelCh = recombin(CROSSOVER,SelCh,PR_CROSS);
+            SelCh = recombin('xalt_edges',SelCh,PR_CROSS);
             SelCh=mutateTSP_path('inversion',SelCh,PR_MUT);
             
             %evaluate offspring, call objective function
