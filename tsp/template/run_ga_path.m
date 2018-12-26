@@ -67,8 +67,9 @@ function run_ga_path(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROS
                 end
             end
             
-            visualizeTSP(x,y,0,Chrom(t,:), minimum, ah1, gen, best, mean_fits, worst, ah2, ObjV, NIND, ah3);
+            visualizeTSP(x,y,Chrom(t,:), minimum, ah1, gen, best, mean_fits, worst, ah2, ObjV, NIND, ah3);
 
+            
             if (sObjV(stopN)-sObjV(1) <= 1e-15)
                   break;
             end          
