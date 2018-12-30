@@ -76,9 +76,14 @@ function run_ga_path(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROS
         	%assign fitness values to entire population
         	FitnV=ranking(ObjV);
         	%select individuals for breeding
-        	SelCh=select('sus', Chrom, FitnV, GGAP);
+        	%SelCh=select('sus', Chrom, FitnV, GGAP);
             
-        	%To DO : Implement RECOMBINATION and MUTATION
+            %SelCh=rankingSelection('rws', Chrom, FitnV, GGAP);
+           
+            numberOfCompetents = 9;
+            SelCh=tournamentSelect(Chrom, FitnV, GGAP,1,numberOfCompetents);
+        	
+            %To DO : Implement RECOMBINATION and MUTATION
             SelCh = recombin('xalt_edges',SelCh,PR_CROSS);
             SelCh=mutateTSP_path('inversion',SelCh,PR_MUT);
             

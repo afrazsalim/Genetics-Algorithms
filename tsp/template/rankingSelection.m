@@ -1,5 +1,6 @@
- %numberOfCandidates: How many candidates take part in competition.
-function SelCh = tournamentSelect(Chrom, FitnV, GGAP,SUBPOP,numberOfCandidates);
+
+
+function SelCh = rankingSelection(SEL_F, Chrom, FitnV, GGAP, SUBPOP);
 
 % Check parameter consistency
    if nargin < 3, error('Not enough input parameter'); end
@@ -7,7 +8,7 @@ function SelCh = tournamentSelect(Chrom, FitnV, GGAP,SUBPOP,numberOfCandidates);
    % Identify the population size (Nind)
    [NindCh,Nvar] = size(Chrom);
    [NindF,VarF] = size(FitnV);
-   disp("Size of this is");
+   
    if NindCh ~= NindF, error('Chrom and FitnV disagree'); end
    if VarF ~= 1, error('FitnV must be a column vector'); end
   
@@ -20,6 +21,7 @@ function SelCh = tournamentSelect(Chrom, FitnV, GGAP,SUBPOP,numberOfCandidates);
 
    if (NindCh/SUBPOP) ~= fix(NindCh/SUBPOP), error('Chrom and SUBPOP disagree'); end
    Nind = NindCh/SUBPOP;  % Compute number of individuals per subpopulation
+
    if nargin < 4, GGAP = 1; end
    if nargin > 3,
       if isempty(GGAP), GGAP = 1;
@@ -32,22 +34,31 @@ function SelCh = tournamentSelect(Chrom, FitnV, GGAP,SUBPOP,numberOfCandidates);
    NSel=max(floor(Nind*GGAP+.5),2);
 
 % Select individuals from population
-  SelCh = [];
-  currentIndex = 1;
-  [ m,n] = size(FitnV);
-   for irun = 1:NSel,
-       %Generate random number between 0-Nind
-       r = randi(m,1,numberOfCandidates);
-       currentIndex = r(1);
-       for j = 1:numberOfCandidates-1,
-         if FitnV(r(j)) > FitnV(r(j+1))
-             currentIndex = r(j);
-         else
-             currentIndex = r(j+1);
-         end
+   Pop = [];
+   Ind = [];
+   for k = 1:NindCh,
+       Index = 1;
+       %Sort the entire Population according to the fitness level.
+       for j = 1: size(FitnV) ,
+           if FitnV(j) < FitnV(Index)
+               Index = j;
+           end
        end
-       SelCh=[SelCh;Chrom(currentIndex,:)];
+       Ind  = [Ind,Index];
+       Pop = [Pop; Chrom(Index,:)];
+       FitnV(Index) = [];
+       Chrom(Index,:) = [];
    end
+   SelProb = zeros(NindCh,1);
+   S = 1.5;
+   for i = 1:NindCh,
+       result = ((2-S)/NindCh) + ((2*(i-1)*(S-1))/(NindCh*(NindCh-1)));
+       SelProb(i) = result;
+   end
+   
+   
+  %call the rws to select individuals now. 
+  SelCh=select('sus', Pop, SelProb, GGAP);
  
 
 % End of function
