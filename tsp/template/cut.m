@@ -13,13 +13,12 @@ if Representation==1
 	NewChrom=adj2path(NewChrom);
 end
 
-disp(NewChrom);
 length = 3;
 start = randi(size(NewChrom,2)-length);
 cut = NewChrom(start : start+length); 
 NewChrom(start : start+length) = [];
 insert = randi(size(NewChrom,2));
-if insert==1 
+if insert==1
     NewChrom = [cut NewChrom(insert: size(NewChrom,2))];
 else
     NewChrom = [NewChrom(1:insert-1) cut NewChrom(insert: size(NewChrom,2))];
