@@ -1,6 +1,6 @@
 
 
-function SelCh = rankingSelection(SEL_F, Chrom, FitnV, GGAP, SUBPOP);
+function SelCh = rankingSelection(SEL_F, Chrom, FitnV, GGAP,S);
 
 % Check parameter consistency
    if nargin < 3, error('Not enough input parameter'); end
@@ -58,7 +58,7 @@ function SelCh = rankingSelection(SEL_F, Chrom, FitnV, GGAP, SUBPOP);
    
    
   %call the rws to select individuals now. 
-  SelCh=select('sus', Pop, SelProb, GGAP);
+  SelCh=select(SEL_F, Pop, SelProb, GGAP);
  
 
 % End of function
