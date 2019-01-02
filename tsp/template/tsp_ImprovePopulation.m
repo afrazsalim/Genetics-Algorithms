@@ -22,9 +22,11 @@ function newpop = tsp_ImprovePopulation(popsize, ncities, pop, improve,dists)
 if (improve)
    for i=1:popsize
      
-     result = improve_path(ncities, pop(i,:),dists);
+       
+     result = improve_path(ncities, adj2path(pop(i,:)),dists);
   
-     pop(i,:) = result;
+     pop(i,:) = path2adj(result);
+
    end
 end
 
