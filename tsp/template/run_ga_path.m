@@ -83,8 +83,8 @@ function run_ga_path(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROS
             SelCh = recombin('xalt_order',SelCh,PR_CROSS);
 
             %SelCh=mutateTSP_path('cut',SelCh,PR_MUT);
-            SelCh=mutateTSP_path('inversion',SelCh,PR_MUT);
-            %SelCh=mutateTSP_path('reciprocal_exchange',SelCh,PR_MUT);
+            %SelCh=mutateTSP_path('inversion',SelCh,PR_MUT);
+            SelCh=mutateTSP_path('reciprocal_exchange',SelCh,PR_MUT);
             
             %evaluate offspring, call objective function
         	ObjVSel = tspfun_path(SelCh,Dist);
