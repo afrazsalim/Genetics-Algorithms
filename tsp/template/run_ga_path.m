@@ -90,7 +90,7 @@ function run_ga_path(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROS
             %To DO : Implement RECOMBINATION and MUTATION
             %SelCh = recombin('xalt_edges',SelCh,PR_CROSS);
         	%To DO : Implement RECOMBINATION and MUTATION
-            SelCh = recombin('xalt_order',SelCh,PR_CROSS);
+            SelCh = recombin('xalt_cycle',SelCh,PR_CROSS);
             %SelCh=mutateTSP_path('cut',SelCh,PR_MUT);
             %SelCh=mutateTSP_path('inversion',SelCh,PR_MUT);
 
