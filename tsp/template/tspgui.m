@@ -107,8 +107,8 @@ set(fh,'Visible','on');
         dataset = datasets{dataset_value};
         % load the dataset
         data = load(['datasets/' dataset]);
-        x=data(:,1)/max([data(:,1);data(:,2)]);y=data(:,2)/max([data(:,1);data(:,2)]);
-        %x=data(:,1);y=data(:,2);
+        %x=data(:,1)/max([data(:,1);data(:,2)]);y=data(:,2)/max([data(:,1);data(:,2)]);
+        x=data(:,1);y=data(:,2);
         NVAR=size(data,1); 
         set(ncitiessliderv,'String',size(data,1));
         axes(ah1);
@@ -141,7 +141,7 @@ set(fh,'Visible','on');
         slider_value = round(fslider_value);
         set(hObject,'Value',slider_value);
         set(gensliderv,'String',slider_value);
-        MAXGEN = round(slider_value);
+        MAXGEN = round(slider_value);ts
     end
     function mutslider_Callback(hObject,eventdata)
         fslider_value = get(hObject,'Value');
@@ -180,7 +180,7 @@ set(fh,'Visible','on');
         set(elitslider,'Visible','off');  
         
         %Implement toggle to change this?
-        %run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR_MUT, CROSSOVER, LOCALLOOP, ah1, ah2, ah3);
+       % run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR_MUT, CROSSOVER, LOCALLOOP, ah1, ah2, ah3);
         run_ga_path(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR_MUT, CROSSOVER, LOCALLOOP, ah1, ah2, ah3);
         end_run();
     end

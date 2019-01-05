@@ -48,14 +48,13 @@ function run_ga_path(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROS
         impObject = improvement;
         %imp.previousCounter = 0;
         % generational loop
-        while (gen<MAXGEN)
+        while (gen<2000)
             sObjV=sort(ObjV);
           	best(gen+1)=min(ObjV);
         	minimum=best(gen+1);
             impObject = improvementGen(impObject,minimum,maxChances);
             if(impObject.result == 0)
                 disp("breaking the main loop");
-                disp(gen);
                 break;
             end
             %disp("generation");
@@ -76,6 +75,7 @@ function run_ga_path(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROS
             end          
         	%assign fitness values to entire population
         	FitnV=ranking(ObjV);
+            %Roulette wheel selection
         	%select individuals for breeding
         	%SelCh=select('sus', Chrom, FitnV, GGAP);
             
@@ -87,20 +87,19 @@ function run_ga_path(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROS
            %This one uses tournament selection.
             numberOfCompetents = 9;
             SelCh=tournamentSelect(Chrom, FitnV, GGAP,1,numberOfCompetents);
-        	
             %To DO : Implement RECOMBINATION and MUTATION
-            SelCh = recombin('xalt_edges',SelCh,PR_CROSS);
+            %SelCh = recombin('xalt_edges',SelCh,PR_CROSS);
         	%To DO : Implement RECOMBINATION and MUTATION
             SelCh = recombin('xalt_order',SelCh,PR_CROSS);
-
             %SelCh=mutateTSP_path('cut',SelCh,PR_MUT);
             %SelCh=mutateTSP_path('inversion',SelCh,PR_MUT);
+
             SelCh=mutateTSP_path('reciprocal_exchange',SelCh,PR_MUT);
             
             %evaluate offspring, call objective function
         	ObjVSel = tspfun_path(SelCh,Dist);
             
-            disp(tspfun_path(SelCh,Dist))
+           % disp(tspfun_path(SelCh,Dist))
             
             %reinsert offspring into population
         	[Chrom ObjV]=reins(Chrom,SelCh,1,1,ObjV,ObjVSel);

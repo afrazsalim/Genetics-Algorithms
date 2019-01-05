@@ -8,9 +8,9 @@
 %
 
 function Offspring=cross_order_based(Parents);
+ 
 	cols=size(Parents,2);
 	Offspring=Parents(2,:);
-    
     positions = sort(randperm(cols, floor(cols/3))); % Create an array with unique numbers to see which positions are taken from the path.
     
     cities=Parents(1, positions);
@@ -24,6 +24,4 @@ function Offspring=cross_order_based(Parents);
             k = k + 1;
         end
     end
-    
-    
-% end function
+end 

@@ -74,12 +74,15 @@ function run_ga(x, y, NIND, MAXGEN, NVAR, ELITIST, STOP_PERCENTAGE, PR_CROSS, PR
             end          
         	%assign fitness values to entire population
         	FitnV=ranking(ObjV);
-        	%select individuals for breeding
-        	SelCh=select('sus', Chrom, FitnV, GGAP);
+        %	select individuals for breeding
+        %	SelCh=select('sus', Chrom, FitnV, GGAP);
             %Selection tournament
-              %numberOfCompetents = 15;
-              %SelCh=tournamentSelect(Chrom, FitnV, GGAP,1,numberOfCompetents);
+            numberOfCompetents = 9;
+            SelCh=tournamentSelect(Chrom, FitnV, GGAP,1,numberOfCompetents);
             
+            %This one uses ranking selection
+           % SelCh=rankingSelection('sus', Chrom, FitnV, GGAP);
+           
         	%recombine individuals (crossover)
             SelCh = recombin(CROSSOVER,SelCh,PR_CROSS);
             SelCh=mutateTSP('inversion',SelCh,PR_MUT);
