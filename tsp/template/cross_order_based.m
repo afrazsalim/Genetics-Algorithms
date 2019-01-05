@@ -2,10 +2,7 @@
 % given 2 parent in the Parents - agrument
 % Parents is a matrix with 2 rows, each row
 % represent the genocode of the parent
-%
-% Tim.Volodine@cs.kuleuven.ac.be
-% Tim.Pillards@cs.kuleuven.ac.be
-%
+
 
 function Offspring=cross_order_based(Parents);
 	cols=size(Parents,2);
